@@ -1,5 +1,6 @@
 #include "state_control.h"
 #include "global_data.h"
+
 #define RF ctrl_fsm_.get()->getFsm().get()
 
 StateControl &StateControl::instance() {
@@ -18,6 +19,7 @@ StateControl::StateControl()
    RF->set_current_states("Init"_s);
    simulatePowerChange();
 }
+
 
 void StateControl::simulatePowerChange()
 {

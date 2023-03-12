@@ -1,6 +1,7 @@
 #ifndef GLOBALDATA_H
 #define GLOBALDATA_H
 #include <iostream>
+#include <queue>
 #include "define.h"
 
 #define GloI GlobalData::instance()
@@ -17,10 +18,14 @@ class GlobalData {
 
  private:
   GlobalData();
-
- public:
+private:
+  struct task_info{
+      std::string name;
+  };
+public:
 int power_value;
 bool is_charge;
+std::queue<task_info> task_queue;
 };
 
 #endif // GLOBALDATA_H

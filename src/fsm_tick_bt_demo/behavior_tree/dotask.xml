@@ -1,40 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
-  <BehaviorTree ID="BehaviorTree">
+  <BehaviorTree ID="TaskExecTree">
     <ReactiveSequence>
-      <IsAbleExecuteTask/>
-      <StartExecuteTask/>
+      <IsAbleExecuteTask robot_state="{robot_state}"/>
+      <StartExecuteTask cur_task_data="{cur_task_data}"
+                        robot_state="{robot_state}"/>
     </ReactiveSequence>
   </BehaviorTree>
 
   <BehaviorTree ID="BehaviorTreeControl">
     <Sequence>
-      <IsAbleStartTask/>
+      <IsAbleStartTask robot_state="{robot_state}"/>
       <Sequence>
         <KeepRunningUntilFailure>
           <Sequence>
             <IsHaveUnexecutedTask/>
             <SubTree ID="BehaviorTree"
-                     _autoremap="false"/>
+                     _autoremap="true"/>
           </Sequence>
         </KeepRunningUntilFailure>
-        <BackToIdle name="BackToIdleOrAbnormal"/>
+        <BackToIdleOrAbnormal robot_state="{robot_state}"/>
       </Sequence>
     </Sequence>
   </BehaviorTree>
 
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
-    <Action ID="BackToIdle"
-            editable="false"/>
+    <Action ID="BackToIdleOrAbnormal"
+            editable="false">
+      <input_port name="robot_state">Weather the status that meets the needs of starting the task</input_port>
+    </Action>
     <Condition ID="IsAbleExecuteTask"
-               editable="false"/>
+               editable="false">
+      <input_port name="robot_state"/>
+    </Condition>
     <Condition ID="IsAbleStartTask"
-               editable="false"/>
+               editable="false">
+      <input_port name="robot_state"/>
+    </Condition>
     <Condition ID="IsHaveUnexecutedTask"
                editable="false"/>
     <Action ID="StartExecuteTask"
-            editable="false"/>
+            editable="false">
+      <input_port name="cur_task_data"/>
+      <output_port name="robot_state"/>
+    </Action>
   </TreeNodesModel>
 
 </root>

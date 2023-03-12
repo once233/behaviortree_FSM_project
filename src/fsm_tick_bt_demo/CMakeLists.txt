@@ -27,6 +27,8 @@ file(GLOB SRC_FILES
  *.h
  behavior_tree/*/*.cpp
  behavior_tree/*/*.h
+ behavior_tree/*.h
+ behavior_tree/*.cpp
  global/*
  ${BEHAVIOR_TREE_NODE}/*.cpp
  ${BEHAVIOR_TREE_NODE}/*.h

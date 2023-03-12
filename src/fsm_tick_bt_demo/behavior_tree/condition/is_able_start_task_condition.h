@@ -16,7 +16,7 @@ public:
    * @param conf BT node configuration
    */
   IsAbleStartTaskCondition(
-    const std::string & condition_name);
+    const std::string & condition_name, const BT::NodeConfig& config);
 
   IsAbleStartTaskCondition() = delete;
 
@@ -32,9 +32,9 @@ public:
    */
   static BT::PortsList providedPorts()
   {
-    return {
-      BT::InputPort<double>("min_battery", "Minimum battery percentage/voltage")
-    };
+      return {
+        BT::InputPort<int>("robot_state")
+      };
   }
 
 private:
@@ -43,7 +43,8 @@ private:
    * @param msg Shared pointer to sensor_msgs::msg::BatteryState message
    */
   double min_battery_;
-  bool is_battery_low_;
+  int robot_state_;
+
 };
 
 #endif // ISBATTERYLOWCONDITION_H

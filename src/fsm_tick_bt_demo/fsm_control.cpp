@@ -37,6 +37,10 @@ void FSMControl::actionInit(const FSMControl::InitEvent& event)
  void FSMControl::actionDoTask()
  {
     output("任务中，此时将启动行为树...")
+    node_ctr_.registerTaskNode();
+    node_ctr_.registerTree("behavior_tree/dotask.xml");
+
+
  }
  void FSMControl::actionHaltTask()
  {

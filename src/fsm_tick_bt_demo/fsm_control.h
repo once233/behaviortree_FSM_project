@@ -2,6 +2,8 @@
 #include <memory>
 #include <iostream>
 #include "define.h"
+#include "behaviortree_cpp/bt_factory.h"
+#include "node_controller.h"
 class FSMControl
 {
 private:
@@ -62,6 +64,7 @@ private:
     FsmLogger logger_;
     /// \brief 状态机实例
     std::shared_ptr<boost::sml::sm<RobotState, boost::sml::logger<FsmLogger>>> fsm_ = nullptr;
+    NodeController node_ctr_;
 
 
 };

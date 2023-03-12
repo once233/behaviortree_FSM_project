@@ -8,13 +8,17 @@ class BackToIdleOrAbnormalAction : public BT::SyncActionNode
 {
 public:
     BackToIdleOrAbnormalAction(const std::string& name, const BT::NodeConfig& config) ;
+    BackToIdleOrAbnormalAction() = delete;
     BT::NodeStatus tick() override;
     static BT::PortsList providedPorts()
     {
         return {
-          BT::InputPort<double>("min_battery", "Minimum battery percentage/voltage")
+          BT::InputPort<int>("robot_state")
         };
     }
+
+private:
+    int robot_state_;
 
 };
 

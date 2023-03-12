@@ -6,15 +6,26 @@
   <TreeNodesModel>
     <!-- ############################### ACTION NODES ################################# -->
    <Action ID="AddTaskToQuene"/>
-   <Action ID="StartExecuteTask"/>
-   <Action ID="BackToIdleOrAbnormal"/>
+   <input_port name="unassign_task_data"></input_port>
+   <Action ID="StartExecuteTask">
+   <input_port name="assign_task_data"></input_port>
+   <output_port name="robot_state"></output_port>
+   </Action>
+   <Action ID="BackToIdleOrAbnormal">
+   <input_port name="robot_state">Weather the status that meets the needs of starting the task</input_port>
+   </Action>
     <!-- ############################### CONDITION NODES ############################## -->
-    <Condition ID="IsAbleStartTask"/>
-    <Condition ID="IsAbleExecuteTask"/>
-    <Condition ID="IsExecutingTask"/>
+    <Condition ID="IsAbleStartTask">
+    <input_port name="robot_state"></input_port>
+    </Condition> 
+    <Condition ID="IsAbleExecuteTask">
+    <input_port name="robot_state"></input_port>
+    </Condition> 
+    <Condition ID="IsExecutingTask">
+    <input_port name="robot_state"></input_port>
+    </Condition> 
     <Condition ID="IsHaveUnexecutedTask"/>
     <Condition ID="IsHaveNewTask"/>
-
 
 
     
