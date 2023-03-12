@@ -38,8 +38,9 @@ NodeStatus CrossDoor::pickLock()
   SleepMS(500);
   _pick_attempts++;
   // succeed at 3rd attempt
-  if (_door_locked && _pick_attempts < 3)
+  if (_door_locked && _pick_attempts > 3)
   {
+    std::cout<< "pickLock.."<<_pick_attempts<< std::endl;
     _door_locked = false;
     _door_open = true;
     return NodeStatus::FAILURE;

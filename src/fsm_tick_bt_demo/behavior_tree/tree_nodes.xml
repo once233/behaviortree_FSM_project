@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+  For instructions on using Groot and description of the following BehaviorTree nodes
+-->
+<root>
+  <TreeNodesModel>
+    <!-- ############################### ACTION NODES ################################# -->
+   <Action ID="AddTaskToQuene"/>
+   <Action ID="StartExecuteTask"/>
+   <Action ID="BackToIdleOrAbnormal"/>
+    <!-- ############################### CONDITION NODES ############################## -->
+    <Condition ID="IsAbleStartTask"/>
+    <Condition ID="IsAbleExecuteTask"/>
+    <Condition ID="IsExecutingTask"/>
+    <Condition ID="IsHaveUnexecutedTask"/>
+    <Condition ID="IsHaveNewTask"/>
+
+
+
+    
+
+
+  
+    <!-- ############################### CONTROL NODES ################################ -->
+  
+    <!-- ############################### DECORATOR NODES ############################## -->
+  
+
+  </TreeNodesModel>
+</root>
+

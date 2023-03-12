@@ -9,6 +9,7 @@ project ("BT_project")
 set(BEHAVIOR_TREE_LIBRARY ${PROJECT_SOURCE_DIR}/lib)
 set(BEHAVIOR_TREE_INCLUDE ${PROJECT_SOURCE_DIR}/include)
 set(BEHAVIOR_TREE_NODE ${PROJECT_SOURCE_DIR}/lib/sample_nodes)
-
-add_subdirectory(hello_BT)
+set(FSM_INCLUDE ${PROJECT_SOURCE_DIR}/include)
+add_subdirectory(src/hello_BT)
+add_subdirectory(src/fsm_tick_bt_demo)
 # 包含子项目。

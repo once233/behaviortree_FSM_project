@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4">
+  <BehaviorTree ID="BehaviorTree">
+    <ReactiveSequence>
+      <IsAbleExecuteTask/>
+      <StartExecuteTask/>
+    </ReactiveSequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="BehaviorTreeControl">
+    <Sequence>
+      <IsAbleStartTask/>
+      <Sequence>
+        <KeepRunningUntilFailure>
+          <Sequence>
+            <IsHaveUnexecutedTask/>
+            <SubTree ID="BehaviorTree"
+                     _autoremap="false"/>
+          </Sequence>
+        </KeepRunningUntilFailure>
+        <BackToIdle name="BackToIdleOrAbnormal"/>
+      </Sequence>
+    </Sequence>
+  </BehaviorTree>
+
+  <!-- Description of Node Models (used by Groot) -->
+  <TreeNodesModel>
+    <Action ID="BackToIdle"
+            editable="false"/>
+    <Condition ID="IsAbleExecuteTask"
+               editable="false"/>
+    <Condition ID="IsAbleStartTask"
+               editable="false"/>
+    <Condition ID="IsHaveUnexecutedTask"
+               editable="false"/>
+    <Action ID="StartExecuteTask"
+            editable="false"/>
+  </TreeNodesModel>
+
+</root>
