@@ -17,6 +17,7 @@ public:
     void registerTaskNode();
     void registerTree(const std::string &file_name);
     BT::Tree createTree(const std::string &tree_name,BT::Blackboard::Ptr &blackboard);
+    BT::Tree createTree(const std::string &tree_name);
 };
 
 #endif // NODECONTROLLER_H

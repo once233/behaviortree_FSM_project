@@ -7,7 +7,8 @@
         <KeepRunningUntilFailure>
           <Sequence>
             <IsHaveUnexecutedTask/>
-            <SubTree ID="TaskExecTree"/>
+            <SubTree ID="TaskExecTree"
+                     _autoremap="true"/>
           </Sequence>
         </KeepRunningUntilFailure>
         <BackToIdleOrAbnormal robot_state="{robot_state}"/>

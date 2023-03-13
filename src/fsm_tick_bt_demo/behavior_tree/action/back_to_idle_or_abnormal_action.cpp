@@ -12,12 +12,12 @@ BT::NodeStatus BackToIdleOrAbnormalAction::tick()
 //    switch (robot_state_) {
 //    case 0:
 //    {
-//        return BT::NodeStatus::FAILURE;
+//     return BT::NodeStatus::SUCCESS;
 //     break;
 //    }
 //    case 1:
 //    {
-//     return BT::NodeStatus::SUCCESS;
+//     return BT::NodeStatus::FAILURE;
 //     break;
 //    }
 //    default:

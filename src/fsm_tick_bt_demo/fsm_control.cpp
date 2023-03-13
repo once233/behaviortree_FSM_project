@@ -10,11 +10,13 @@ FSMControl::FSMControl(/* args */)
     }
     if(blackboard_ ==nullptr)
     {
-        blackboard_ = BT::Blackboard::create();
         node_ctr_.registerTaskNode();
         node_ctr_.registerTree("/home/ros2/behavior_tree/my_project/src/fsm_tick_bt_demo/behavior_tree/dotask.xml");
-        do_task_tree_ = node_ctr_.createTree("BehaviorTreeControl",blackboard_);
+        do_task_tree_ = node_ctr_.createTree("BehaviorTreeControl");
+        blackboard_ = do_task_tree_.rootBlackboard();
         blackboard_->set<int>("robot_state",0);
+
+        output("robot_state: "<<blackboard_->get<int>("robot_state"))
     }
 
 }
@@ -32,14 +34,17 @@ void FSMControl::actionInit(const FSMControl::InitEvent& event)
     if(GloI.power_value<20)
     {
         output("电量过低，开始充电")
+         do_task_tree_.haltTree();
         fsm_->process_event(StartChargeEvent{});
         return;
     }
     else
     {
         GloI.is_charge=false;
+        fsm_->process_event(DoTaskEvent{});
+
     }
-    fsm_->process_event(DoTaskEvent{});
+
 
 }
  void FSMControl::actionDoTask()
@@ -53,7 +58,7 @@ void FSMControl::actionInit(const FSMControl::InitEvent& event)
     task.name = "3";
     GloI.task_queue_.push(task);
 
-//    std::thread thread_([this](){
+    std::thread thread_([this](){
     while(1)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -74,8 +79,8 @@ void FSMControl::actionInit(const FSMControl::InitEvent& event)
             output("任务进行中")
         }
     }
-//    });
-//    thread_.detach();
+   });
+   thread_.detach();
 
 
  }

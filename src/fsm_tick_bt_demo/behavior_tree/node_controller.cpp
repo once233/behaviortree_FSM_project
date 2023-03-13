@@ -24,3 +24,9 @@ BT::Tree NodeController::createTree(const std::string &tree_name,BT::Blackboard:
     output("创建树")
     return factory_.createTree(tree_name,blackboard);
 }
+
+BT::Tree NodeController::createTree(const std::string &tree_name)
+{
+    output("创建树,不传入黑板")
+    return factory_.createTree(tree_name);
+}

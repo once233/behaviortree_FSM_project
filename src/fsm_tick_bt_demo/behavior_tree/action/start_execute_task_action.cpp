@@ -24,7 +24,7 @@ BT::NodeStatus StartExecuteTaskAction::onRunning()
     output("任务执行中: 任务"<<GloI.cur_task_.name)
     if(fake_exec++>10)
     {
-//         setOutput("robot_state", 0);
+//        setOutput("robot_state", 0);
         output("已收到任务结束信号")
         return BT::NodeStatus::SUCCESS;
     }
@@ -34,5 +34,5 @@ BT::NodeStatus StartExecuteTaskAction::onRunning()
 // callback to execute if the action was aborted by another node
 void StartExecuteTaskAction::onHalted()
 {
-output("强制中止任务")
+    output("强制中止任务")
 }

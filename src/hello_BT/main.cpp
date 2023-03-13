@@ -24,6 +24,13 @@ mygoal ={3,3};
 blackboard->set<Pose2D>("mygoal",mygoal);
 blackboard->get<Pose2D>("mygoal",aftergoal);
 std::cout<< aftergoal.x<< " &" << aftergoal.y;
+std::vector<StringView> a= blackboard->getKeys();
+for(std::string_view a_: a)
+{
+    std::cout<<"blackboard key:" << a_<< std::endl;
+}
+
+
 tree.tickWhileRunning();
 
 

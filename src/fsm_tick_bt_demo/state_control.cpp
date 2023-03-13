@@ -26,10 +26,10 @@ void StateControl::simulatePowerChange()
     std::thread power_simulate([this]() {
         while(1)
         {
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            std::this_thread::sleep_for(std::chrono::milliseconds(300));
             if(GloI.power_value<=100&&!GloI.is_charge)
             {
-                if(--GloI.power_value<=20)
+                if(--GloI.power_value<20)
                 {
                     output("电量低，停止任务准备充电")
                     RF->process_event(FSMControl::BatteryLowEvent{});
