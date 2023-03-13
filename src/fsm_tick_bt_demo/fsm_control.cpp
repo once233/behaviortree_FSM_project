@@ -15,6 +15,9 @@ FSMControl::FSMControl(/* args */)
         do_task_tree_ = node_ctr_.createTree("BehaviorTreeControl");
         blackboard_ = do_task_tree_.rootBlackboard();
         blackboard_->set<int>("robot_state",0);
+        std::cout<<"subtree size: "<<do_task_tree_.subtrees.size();
+
+
 
         output("robot_state: "<<blackboard_->get<int>("robot_state"))
     }
@@ -34,7 +37,7 @@ void FSMControl::actionInit(const FSMControl::InitEvent& event)
     if(GloI.power_value<20)
     {
         output("电量过低，开始充电")
-         do_task_tree_.haltTree();
+
         fsm_->process_event(StartChargeEvent{});
         return;
     }
@@ -93,6 +96,8 @@ void FSMControl::actionInit(const FSMControl::InitEvent& event)
  void FSMControl::actionFinishTask()
  {
      output("任务结束，返回空闲")
+
+     actionIdel();
  }
 
  void FSMControl::actionCharge()

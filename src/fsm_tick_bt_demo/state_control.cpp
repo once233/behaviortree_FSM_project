@@ -32,6 +32,7 @@ void StateControl::simulatePowerChange()
                 if(--GloI.power_value<20)
                 {
                     output("电量低，停止任务准备充电")
+                    RF->process_event(FSMControl::HaltTaskEvent{});
                     RF->process_event(FSMControl::BatteryLowEvent{});
                 }
                 output("电量: "<<GloI.power_value)

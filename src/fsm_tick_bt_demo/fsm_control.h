@@ -42,6 +42,7 @@ public:
     struct InitEvent {std::string init_info;};   // 初始化信号
     struct DoTaskEvent {};  // 任务信号
     struct FinishTaskEvent {};  // 任务信号
+    struct HaltTaskEvent{}; // 中止任务信号
 
 
 public:
@@ -87,9 +88,11 @@ struct FSMControl::RobotState {
      *"Init"_s           + event<InitEvent>           / action_init     = "Initing"_s,
       "Initing"_s        + event<InitOKEvent>         / action_idle     = "Idle"_s,
       "Idle"_s           + event<BatteryLowEvent>     / action_idle     = "Idle"_s,
+      "Tasking"_s           + event<BatteryLowEvent>     / action_idle     = "Idle"_s,
       "Idle"_s           + event<StartChargeEvent>     / action_charge  = "Charging"_s,
       "Charging"_s       + event<BatteryFullEvent>     / action_idle    = "Idle"_s,
       "Tasking"_s        + event<FinishTaskEvent>     / action_finish_tasks    = "Idle"_s,
+      "Tasking"_s        + event<HaltTaskEvent>     / action_halt_task    = "Idle"_s,
       "Idle"_s           + event<DoTaskEvent>           / action_task     = "Tasking"_s
     );
     // clang-format on

@@ -30,6 +30,7 @@ for(std::string_view a_: a)
     std::cout<<"blackboard key:" << a_<< std::endl;
 }
 
+std::cout<<"tree.subtrees.size(): "<<tree.subtrees.size();
 
 tree.tickWhileRunning();
 
