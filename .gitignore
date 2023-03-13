@@ -57,7 +57,7 @@ Thumbs.db
 *.vcxproj
 *vcxproj.*
 .vscode/
-
+.groot*
 # MinGW generated files
 *.Debug
 *.Release

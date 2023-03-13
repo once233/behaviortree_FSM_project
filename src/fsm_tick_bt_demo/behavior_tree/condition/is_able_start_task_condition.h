@@ -42,7 +42,7 @@ private:
    * @brief Callback function for battery topic
    * @param msg Shared pointer to sensor_msgs::msg::BatteryState message
    */
-  double min_battery_;
+  double min_battery_=20;
   int robot_state_;
 
 };

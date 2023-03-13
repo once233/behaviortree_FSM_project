@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
+  <BehaviorTree ID="BehaviorTreeControl">
+    <Sequence>
+      <IsAbleStartTask robot_state="{robot_state}"/>
+      <Fallback>
+        <KeepRunningUntilFailure>
+          <Sequence>
+            <IsHaveUnexecutedTask/>
+            <SubTree ID="TaskExecTree"/>
+          </Sequence>
+        </KeepRunningUntilFailure>
+        <BackToIdleOrAbnormal robot_state="{robot_state}"/>
+      </Fallback>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="TaskExecTree">
     <ReactiveSequence>
       <IsAbleExecuteTask robot_state="{robot_state}"/>
       <StartExecuteTask cur_task_data="{cur_task_data}"
                         robot_state="{robot_state}"/>
     </ReactiveSequence>
-  </BehaviorTree>
-
-  <BehaviorTree ID="BehaviorTreeControl">
-    <Sequence>
-      <IsAbleStartTask robot_state="{robot_state}"/>
-      <Sequence>
-        <KeepRunningUntilFailure>
-          <Sequence>
-            <IsHaveUnexecutedTask/>
-            <SubTree ID="BehaviorTree"
-                     _autoremap="true"/>
-          </Sequence>
-        </KeepRunningUntilFailure>
-        <BackToIdleOrAbnormal robot_state="{robot_state}"/>
-      </Sequence>
-    </Sequence>
   </BehaviorTree>
 
   <!-- Description of Node Models (used by Groot) -->

@@ -1,42 +1,38 @@
 #include "start_execute_task_action.h"
 
-StartExecuteTaskAction::StartExecuteTaskAction(const std::string& name, const BT::NodeConfig& config):BT::SyncActionNode(name, config)
+StartExecuteTaskAction::StartExecuteTaskAction(const std::string& name, const BT::NodeConfig& config):BT::StatefulActionNode(name, config)
 {
     output("构建StartExecuteTaskAction")
    fake_exec=0; //模拟执行任务
    exec_state_=2;//任务执行状态
 }
 
-BT::NodeStatus StartExecuteTaskAction::tick()
+// this function is invoked once at the beginning.
+BT::NodeStatus StartExecuteTaskAction::onStart()
+{
+//    setOutput("robot_state", 1);
+    fake_exec=0; //模拟执行任务
+    output("重置任务状态并开始任务")
+    return BT::NodeStatus::RUNNING;
+}
+
+// If onStart() returned RUNNING, we will keep calling
+// this method until it return something different from RUNNING
+BT::NodeStatus StartExecuteTaskAction::onRunning()
 {
 
-    switch (exec_state_) {
-    case 0:
+    output("任务执行中: 任务"<<GloI.cur_task_.name)
+    if(fake_exec++>10)
     {
-        setOutput("robot_state", 1);
-        return BT::NodeStatus::FAILURE;
+//         setOutput("robot_state", 0);
+        output("已收到任务结束信号")
+        return BT::NodeStatus::SUCCESS;
     }
-    case 1:
-    {
-     setOutput("robot_state", 0);
-     output("任务结束")
-     fake_exec=0;
-     exec_state_=2;
-     return BT::NodeStatus::SUCCESS;
-    }
-    case 2:
-    {
-        setOutput("robot_state", 1);
-        output("任务执行中")
-        if(fake_exec++>10)
-        {
-            exec_state_=1;
-            output("已受到任务结束信号")
-        }
+    return BT::NodeStatus::RUNNING;
+}
 
-        return BT::NodeStatus::RUNNING;
-    }
-    default:
-        return BT::NodeStatus::FAILURE;
-    }
+// callback to execute if the action was aborted by another node
+void StartExecuteTaskAction::onHalted()
+{
+output("强制中止任务")
 }

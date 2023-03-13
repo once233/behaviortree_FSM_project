@@ -19,13 +19,15 @@ class GlobalData {
  private:
   GlobalData();
 private:
+
+public:
   struct task_info{
       std::string name;
   };
-public:
 int power_value;
 bool is_charge;
-std::queue<task_info> task_queue;
+std::queue<task_info> task_queue_;
+task_info cur_task_;
 };
 
 #endif // GLOBALDATA_H

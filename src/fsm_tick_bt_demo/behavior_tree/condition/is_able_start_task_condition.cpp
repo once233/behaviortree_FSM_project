@@ -11,14 +11,17 @@ IsAbleStartTaskCondition::IsAbleStartTaskCondition(
 
 BT::NodeStatus IsAbleStartTaskCondition::tick()
 {
+
     getInput("robot_state;", robot_state_);
+
+    output("是否满足开始任务条件 robot_state_"<<robot_state_)
     if (min_battery_>GloI.power_value) {
        return BT::NodeStatus::FAILURE;
      }
-    else if(!robot_state_)
+    else
     {
         return BT::NodeStatus::SUCCESS;
     }
-    else
-     return BT::NodeStatus::FAILURE;
+//    else
+//     return BT::NodeStatus::FAILURE;
 }

@@ -41,6 +41,7 @@ public:
     struct StartChargeEvent {};   // 电池量低信号
     struct InitEvent {std::string init_info;};   // 初始化信号
     struct DoTaskEvent {};  // 任务信号
+    struct FinishTaskEvent {};  // 任务信号
 
 
 public:
@@ -55,6 +56,7 @@ public:
      void actionDoTask();
      void actionHaltTask();
      void actionCharge();
+     void actionFinishTask();
 
 private:
 
@@ -65,7 +67,8 @@ private:
     /// \brief 状态机实例
     std::shared_ptr<boost::sml::sm<RobotState, boost::sml::logger<FsmLogger>>> fsm_ = nullptr;
     NodeController node_ctr_;
-
+    BT::Tree do_task_tree_;
+    BT::Blackboard::Ptr blackboard_;
 
 };
 
@@ -74,6 +77,7 @@ const auto action_idle = [](FSMControl* rf) {rf->actionIdel();};    // 机器人
 const auto action_task = [](FSMControl* rf) { rf->actionDoTask();};    // 机器人任务动作
 const auto action_halt_task = [](FSMControl* rf) {rf->actionHaltTask();};    // 机器人空闲动作
 const auto action_charge = [](FSMControl* rf) {rf->actionCharge();};    // 机器人空闲动作
+const auto action_finish_tasks = [](FSMControl* rf) {rf->actionFinishTask();};    // 机器人空闲动作
 /// \brief 机器人状态
 struct FSMControl::RobotState {
   auto operator()() const noexcept {
@@ -85,7 +89,7 @@ struct FSMControl::RobotState {
       "Idle"_s           + event<BatteryLowEvent>     / action_idle     = "Idle"_s,
       "Idle"_s           + event<StartChargeEvent>     / action_charge  = "Charging"_s,
       "Charging"_s       + event<BatteryFullEvent>     / action_idle    = "Idle"_s,
-      "Tasking"_s        + event<BatteryLowEvent>     / action_halt_task     = "Idle"_s,
+      "Tasking"_s        + event<FinishTaskEvent>     / action_finish_tasks    = "Idle"_s,
       "Idle"_s           + event<DoTaskEvent>           / action_task     = "Tasking"_s
     );
     // clang-format on

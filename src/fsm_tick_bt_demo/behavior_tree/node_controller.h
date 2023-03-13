@@ -13,8 +13,10 @@ class NodeController
 public:
     NodeController();
     BT::BehaviorTreeFactory factory_;
+    BT::Tree *tree_;
     void registerTaskNode();
     void registerTree(const std::string &file_name);
+    BT::Tree createTree(const std::string &tree_name,BT::Blackboard::Ptr &blackboard);
 };
 
 #endif // NODECONTROLLER_H
