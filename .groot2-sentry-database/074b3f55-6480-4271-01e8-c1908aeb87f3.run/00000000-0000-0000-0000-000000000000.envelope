@@ -1,3 +1,0 @@
-{"dsn":"https://75b7bc1bb9374d69a638b08db2f8ab55@o4504077504872448.ingest.sentry.io/4504082948030464"}
-{"type":"session","length":207}
-{"init":true,"sid":"e04fab54-b550-4b6f-2dcf-3621851080d0","status":"exited","errors":0,"started":"2023-03-12T07:09:07.482Z","duration":32011.788,"attrs":{"release":"groot2@0.5.0","environment":"production"}}
