@@ -3,7 +3,7 @@
 #
 cmake_minimum_required (VERSION 3.5.1)
 
-project (fsm_tick_bt_demo VERSION 1.0)
+project (async_demo VERSION 1.0)
 set(PROJECT_AUTHORS yyj)
 
 include_directories(
@@ -33,11 +33,10 @@ file(GLOB SRC_FILES
  ${BEHAVIOR_TREE_NODE}/*.cpp
  ${BEHAVIOR_TREE_NODE}/*.h
 )
-message("node dir " ${BEHAVIOR_TREE_NODE})
 configure_file(cmake_config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/global/cmake_config.h)
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 target_link_libraries(${PROJECT_NAME} libbehaviortree_cpp.so libpthread.so)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-#target_compile_definitions(${PROJECT_NAME}  PUBLIC "PROJECT_AUTHORS=1\"${PROJECT_AUTHORS}\"1")
+
 

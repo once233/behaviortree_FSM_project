@@ -45,11 +45,11 @@ public:
 
 
 public:
-    FSMControl();
+    FSMControl(std::string desc);
     ~FSMControl();
 
     std::shared_ptr<boost::sml::sm<RobotState, boost::sml::logger<FsmLogger>>> getFsm() { return fsm_; }
-
+    std::string desc_;
 public:
      void actionInit(const FSMControl::InitEvent& event);
      void actionIdel();
@@ -69,6 +69,7 @@ private:
     NodeController node_ctr_;
     BT::Tree do_task_tree_;
     BT::Blackboard::Ptr blackboard_;
+    bool is_halt_tree_;
 
 };
 

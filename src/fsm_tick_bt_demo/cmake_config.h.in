@@ -1,0 +1,5 @@
+// the configured options and setting for Tutorial
+#define VERSION_MAJOR @fsm_tick_bt_demo_VERSION_MAJOR@
+#define VERSION_MINOR @fsm_tick_bt_demo_VERSION_MINOR@
+#define PROJECT_NAME "@PROJECT_NAME@"
+#define PROJECT_AUTHORS "@PROJECT_AUTHORS@"

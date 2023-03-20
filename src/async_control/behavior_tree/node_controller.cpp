@@ -10,7 +10,12 @@ void NodeController::registerTaskNode()
     factory_.registerNodeType<BackToIdleOrAbnormalAction>("BackToIdleOrAbnormal");
     factory_.registerNodeType<StartExecuteTaskAction>("StartExecuteTask");
     factory_.registerNodeType<IsAbleExecuteTaskCondition>("IsAbleExecuteTask");
-    factory_.registerNodeType<IsAbleStartTaskCondition>("IsAbleStartTask");
+    BT::NodeBuilder builder_IsAbleStartTaskCondition =
+       [](const std::string&name, const BT::NodeConfig&config)
+    {
+        return std::make_unique<IsAbleStartTaskCondition>( name, config, 111 );
+    };
+    factory_.registerBuilder<IsAbleStartTaskCondition>("IsAbleStartTask",builder_IsAbleStartTaskCondition);
     factory_.registerNodeType<IsHaveUnexecutedTaskCondition>("IsHaveUnexecutedTask");
 }
 void NodeController::registerTree(const std::string &file_name)
