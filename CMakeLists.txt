@@ -15,4 +15,5 @@ set(FSM_INCLUDE ${PROJECT_SOURCE_DIR}/include)
 add_subdirectory(src/hello_BT)
 add_subdirectory(src/fsm_tick_bt_demo)
 add_subdirectory(src/async_control)
+add_subdirectory(src/update_condition)
 

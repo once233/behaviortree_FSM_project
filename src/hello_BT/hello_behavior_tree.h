@@ -107,15 +107,32 @@ static const char* xml_text = R"(
 
  <root BTCPP_format="4" >
      <BehaviorTree ID="MainTree">
-        <Sequence name="root">
-            <CalculateGoal   goal="{GoalPosition}" />
-            <PrintTarget     target="{GoalPosition}" />
-            <Script          code="OtherGoal='-1;3'" />
-            <PrintTarget     target="{OtherGoal}" />
-        </Sequence>
+        <Switch2 case_1="c1" case_2="c2" variable="c2">
+            <Sequence>
+                <CalculateGoal   goal="{GoalPosition}" />
+                <PrintTarget     target="{GoalPosition}" />
+                <Script          code="OtherGoal='-1;3'" />
+                <PrintTarget     target="{OtherGoal}" />
+            </Sequence>
+            <Sequence>
+                <CalculateGoal   goal="{GoalPosition}" />
+                <PrintTarget     target="{GoalPosition}" />
+            </Sequence>
+            <Sequence>
+                <PrintTarget     target="{GoalPosition}" />
+            </Sequence>
+        </Switch2>
      </BehaviorTree>
  </root>
  )";
+
+//        <Sequence name="root">
+//            <CalculateGoal   goal="{GoalPosition}" />
+//            <PrintTarget     target="{GoalPosition}" />
+//            <Script          code="OtherGoal='-1;3'" />
+//            <PrintTarget     target="{OtherGoal}" />
+//        </Sequence>
+
 
 // clang-format on
 

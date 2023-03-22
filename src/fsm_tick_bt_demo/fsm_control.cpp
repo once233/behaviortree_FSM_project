@@ -17,9 +17,6 @@ FSMControl::FSMControl(/* args */)
         blackboard_ = do_task_tree_.rootBlackboard();
         blackboard_->set<int>("robot_state",0);
         std::cout<<"subtree size: "<<do_task_tree_.subtrees.size();
-
-
-
         output("robot_state: "<<blackboard_->get<int>("robot_state"))
     }
 

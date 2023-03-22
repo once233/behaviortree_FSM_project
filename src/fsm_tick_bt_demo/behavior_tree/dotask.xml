@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
   <BehaviorTree ID="BehaviorTreeControl">
-    <Sequence>
-      <IsAbleStartTask robot_state="{robot_state}"/>
-      <Fallback>
-        <KeepRunningUntilFailure>
-          <Sequence>
-            <IsHaveUnexecutedTask/>
-            <SubTree ID="TaskExecTree"
-                     _autoremap="true"/>
-          </Sequence>
-        </KeepRunningUntilFailure>
-        <BackToIdleOrAbnormal robot_state="{robot_state}"/>
-      </Fallback>
-    </Sequence>
+    <Fallback>
+      <Sequence>
+        <IsAbleStartTask robot_state="{robot_state}"/>
+        <Fallback>
+          <KeepRunningUntilFailure>
+            <Sequence>
+              <IsHaveUnexecutedTask/>
+              <SubTree ID="TaskExecTree"
+                       _autoremap="true"/>
+            </Sequence>
+          </KeepRunningUntilFailure>
+          <BackToIdleOrAbnormal robot_state="{robot_state}"/>
+        </Fallback>
+      </Sequence>
+      <HaltTaskHandle/>
+    </Fallback>
   </BehaviorTree>
 
   <BehaviorTree ID="TaskExecTree">
@@ -30,6 +33,8 @@
             editable="false">
       <input_port name="robot_state">Weather the status that meets the needs of starting the task</input_port>
     </Action>
+    <Action ID="HaltTaskHandle"
+            editable="true"/>
     <Condition ID="IsAbleExecuteTask"
                editable="false">
       <input_port name="robot_state"/>

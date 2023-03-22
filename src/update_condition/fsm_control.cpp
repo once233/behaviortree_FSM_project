@@ -9,18 +9,28 @@ FSMControl::FSMControl(std::string desc):is_halt_tree_(false)
     {
         fsm_ = std::make_shared<boost::sml::sm<RobotState, boost::sml::logger<FsmLogger>>>(this, logger_);
         output("创建状态机成功"<<PROJECT_AUTHORS<<" desc:"<<desc_)
-                desc_=desc;
+         desc_=desc;
     }
 
 
 
         node_ctr_.registerTaskNode();
-        node_ctr_.registerTree("/home/ros2/behavior_tree/my_project/src/fsm_tick_bt_demo/behavior_tree/dotask.xml");
+        node_ctr_.registerTree("/home/ros2/behavior_tree/my_project/src/update_condition/behavior_tree/dotask.xml");
+//        blackboard_ = BT::Blackboard::create();
+        do_task_tree_ = node_ctr_.createTree("BehaviorTreeControl"/*,blackboard_*/);
 
-        do_task_tree_ = node_ctr_.createTree("BehaviorTreeControl");
+
+        std::cout<<"subtree size: "<<do_task_tree_.subtrees.size()<<std::endl;
+//        do_task_tree_.subtrees[0]->blackboard->set<std::string>("desc",desc_);
+        do_task_tree_.subtrees[0]->blackboard->set<std::function<void(int)>>("count",[](int n){
+            output("fsm_control revice callback"<< n)
+        });
+
+//        do_task_tree_.subtrees[0]->blackboard->addSubtreeRemapping("desc","desc");
 
 
-        std::cout<<"subtree size: "<<do_task_tree_.subtrees.size();
+
+
         for(BT::Tree::Subtree::Ptr p:do_task_tree_.subtrees)
         {
             p->blackboard->debugMessage();

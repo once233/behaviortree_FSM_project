@@ -8,7 +8,6 @@
 #include "condition/is_able_execute_task_condition.h"
 #include "condition/is_able_start_task_condition.h"
 #include "condition/is_have_unexecuted_task_condition.h"
-BT::NodeStatus simpleHaltTaksHandle(BT::TreeNode& self);
 class NodeController
 {
 public:
@@ -19,9 +18,6 @@ public:
     void registerTree(const std::string &file_name);
     BT::Tree createTree(const std::string &tree_name,BT::Blackboard::Ptr blackboard);
     BT::Tree createTree(const std::string &tree_name);
-
-
-
 };
 
 #endif // NODECONTROLLER_H

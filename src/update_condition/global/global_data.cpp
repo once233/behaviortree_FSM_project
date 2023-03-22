@@ -4,6 +4,6 @@ GlobalData& GlobalData::instance() {
   return instance;
 }
 
-GlobalData::GlobalData():is_charge(false),power_value(25){
+GlobalData::GlobalData():is_charge(false),power_value(30){
 
 }
